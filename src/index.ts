@@ -1,6 +1,10 @@
 import { User } from './models/User'
 
-const user = new User({ name: 'felipe', age: 20 })
+const user = new User({ name: 'bob', age: 20 })
 
-const getData = user.get('age')
-console.log(getData)
+user.set({ name: 'dragon' })
+user.set({ age: 300 })
+
+const getName = user.get('name')
+const getAge = user.get('age')
+console.log({ getName, getAge })

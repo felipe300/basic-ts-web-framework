@@ -120,6 +120,22 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 })({"src/models/User.ts":[function(require,module,exports) {
 "use strict";
 
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -127,12 +143,18 @@ exports.User = void 0;
 
 var User = function () {
   function User(data) {
-    this.data = data;
-  }
+    var _this = this;
 
-  User.prototype.get = function (propName) {
-    return this.data[propName];
-  };
+    this.data = data;
+
+    this.get = function (propName) {
+      return _this.data[propName];
+    };
+
+    this.set = function (update) {
+      _this.data = __assign(__assign({}, _this.data), update);
+    };
+  }
 
   return User;
 }();
@@ -148,11 +170,21 @@ Object.defineProperty(exports, "__esModule", {
 var User_1 = require("./models/User");
 
 var user = new User_1.User({
-  name: 'felipe',
+  name: 'bob',
   age: 20
 });
-var getData = user.get('age');
-console.log(getData);
+user.set({
+  name: 'dragon'
+});
+user.set({
+  age: 300
+});
+var getName = user.get('name');
+var getAge = user.get('age');
+console.log({
+  getName: getName,
+  getAge: getAge
+});
 },{"./models/User":"src/models/User.ts"}],"../../../.nvm/versions/node/v14.17.5/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -181,7 +213,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41341" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41375" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
