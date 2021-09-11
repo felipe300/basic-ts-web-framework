@@ -39,5 +39,5 @@ export class User {
       this.set(response.data)
     })
   }
-
+  
 }
