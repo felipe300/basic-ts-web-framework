@@ -2,7 +2,4 @@ node_modules/
 
 .cache
 
-.gitignore
-
-
-json.db
+dist/
