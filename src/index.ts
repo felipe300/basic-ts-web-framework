@@ -1,15 +1,9 @@
 import { User } from './models/User'
 
-const user = new User({ name: 'bob', age: 20 })
+const user = new User({ id: 1 })
 
-user.on('change', () => {
-    console.log('change 1')
-})
-user.on('wheel', () => {
-    console.log('wheel 2')
-})
-user.on('click', () => {
-    console.log('click 1')
-})
+user.fetch()
 
-user.trigger('click')
+setTimeout(() => {
+  console.log(user)
+}, 4000)

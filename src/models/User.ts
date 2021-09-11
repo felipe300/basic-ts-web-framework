@@ -1,6 +1,9 @@
 import { Event } from '../types/Event'
 import { Callback } from '../types/Callback'
 import { UserProps } from '../interfaces/UserProps'
+import axios, { AxiosResponse } from 'axios'
+
+const url = 'http://localhost:3000/users'
 
 export class User {
   events: { [key: string]: Callback[] } = {}
@@ -28,4 +31,13 @@ export class User {
 
     handlers.forEach((callback) => callback())
   }
+
+  fetch = (): void => {
+    // fetch user data
+    const getData = axios.get(`${url}/${this.get('id')}`)
+    getData.then((response: AxiosResponse): void => {
+      this.set(response.data)
+    })
+  }
+
 }
