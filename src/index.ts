@@ -2,9 +2,14 @@ import { User } from './models/User'
 
 const user = new User({ name: 'bob', age: 20 })
 
-user.set({ name: 'dragon' })
-user.set({ age: 300 })
+user.on('change', () => {
+    console.log('change 1')
+})
+user.on('wheel', () => {
+    console.log('wheel 2')
+})
+user.on('click', () => {
+    console.log('click 1')
+})
 
-const getName = user.get('name')
-const getAge = user.get('age')
-console.log({ getName, getAge })
+user.trigger('click')
