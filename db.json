@@ -16,9 +16,8 @@
       "id": 3
     },
     {
-      "name": "andy",
-      "age": 20,
-      "id": 4
+      "id": 4,
+      "name": "Andy Bogart"
     }
   ]
 }
