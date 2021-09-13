@@ -1,12 +1,11 @@
-import { Event } from '../types/Event'
-import { Callback } from '../types/Callback'
-import { UserProps } from '../interfaces/UserProps'
 import axios, { AxiosResponse } from 'axios'
+import { UserProps } from '../interfaces/UserProps'
+import { Eventing } from './Eventing'
 
 const url = 'http://localhost:3000/users'
 
 export class User {
-  events: { [key: string]: Callback[] } = {}
+  public events: Eventing = new Eventing()
 
   constructor(private data: UserProps) {}
 
@@ -18,20 +17,6 @@ export class User {
     this.data = { ...this.data, ...update }
   }
 
-  on = (eventName: Event, callback: Callback): void => {
-    const handlers = this.events[eventName] || []
-    handlers.push(callback)
-    this.events[eventName] = handlers
-  }
-
-  trigger = (eventName: Event): void => {
-    const handlers = this.events[eventName]
-
-    if (!handlers || handlers.length === 0) return
-
-    handlers.forEach((callback) => callback())
-  }
-
   fetch = (): void => {
     // fetch user data
     const getData = axios.get(`${url}/${this.get('id')}`)
@@ -39,5 +24,9 @@ export class User {
       this.set(response.data)
     })
   }
-  
+
+  save = (): void => {
+    const userId = this.get('id')
+    userId ? axios.put(`${url}/${userId}`, this.data) : axios.post(url, this.data)
+  }
 }

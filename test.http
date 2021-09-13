@@ -5,3 +5,13 @@ Host: localhost:3000
 ### get user by id
 GET http://localhost:3000/users/1 HTTP/1.1
 Host: localhost:3000
+
+### create user
+POST http://localhost:3000/users HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+
+{
+    "name": "Bob",
+    "age": 32
+}
