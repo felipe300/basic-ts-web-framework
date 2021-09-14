@@ -1,19 +1,12 @@
 import axios, { AxiosPromise } from 'axios'
+import { HasId } from '../interfaces/HasId'
 
-interface HasId {
-  id?: number
-}
-
-export class Sync<T extends HasId> {
+export class ApiSync<T extends HasId> {
   constructor(public rootUrl: string) {}
 
   fetch = (id: number): AxiosPromise => {
     return axios.get(`${this.rootUrl}/${id}`)
   }
-
-  //   getData.then((response: AxiosResponse): void => {
-  //     this.set(response.data)
-  //   })
 
   save = (data: HasId): AxiosPromise => {
     const { id } = data
